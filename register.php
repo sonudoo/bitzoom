@@ -155,9 +155,9 @@ if (mysqli_num_rows($result1) > 0 || mysqli_num_rows($result2) > 0)
   }
   else
   {
-  if ($rollarr[2] == "16" && (!isset($_COOKIE['cin'])))
+  if ($rollarr[2] == "16")
     {
-    /* If a student is newly registered in our college. (For example first year student), I won't have a record of that student in hostel allotment list, since it is prepared before the freshers are alloted a hostel. So we create a seperate registration form for them */
+    /* If a student is newly registered in our college. (For example first year student, 2k16 students as of now), I won't have a record of that student in hostel allotment list, since it is prepared before the freshers are alloted a hostel. So we create a seperate registration form for them */
     echo "<font color=black face=arial size=2px><b>You seem to be a new student of BIT. We don't have your data in our database. Please register using this form</b></font><br /><br /><button type=\"button\" onclick=\"location.href='newreg/new.php'\" class=\"btn btn-primary\" style=\"vertical-align:middle\">Register as a new BIT student</button>&nbsp;&nbsp;&nbsp;";
     exit;
     }

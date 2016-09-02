@@ -5,9 +5,6 @@
 $count = fgets($datei,1000);
 fclose($datei);
 $count=$count + 1 ;
-echo "$count" ;
-echo " hits" ;
-echo "\n" ;
 $datei = fopen("counter.log","w");
 fwrite($datei, $count);
 fclose($datei);*/
@@ -15,13 +12,13 @@ fclose($datei);*/
 <?php 
 /* Uncomment the following lines if you want to forse SSL on your website for secure browsing */ 
 /*if($_SERVER[ "HTTPS"] !="on" ) { 
-	$pageURL="Location: https://" ; 
-	if ($_SERVER[ "SERVER_PORT"] !="80" ) { 
-		$pageURL .=$ _SERVER[ "SERVER_NAME"] . ":" . $_SERVER[ "SERVER_PORT"] . $_SERVER[ "REQUEST_URI"]; 
-	} else { 
-		$pageURL .=$ _SERVER[ "SERVER_NAME"] . $_SERVER[ "REQUEST_URI"]; 
-	} 
-	header($pageURL); 
+    $pageURL="Location: https://" ; 
+    if ($_SERVER[ "SERVER_PORT"] !="80" ) { 
+        $pageURL .=$ _SERVER[ "SERVER_NAME"] . ":" . $_SERVER[ "SERVER_PORT"] . $_SERVER[ "REQUEST_URI"]; 
+    } else { 
+        $pageURL .=$ _SERVER[ "SERVER_NAME"] . $_SERVER[ "REQUEST_URI"]; 
+    } 
+    header($pageURL); 
 }*/ 
 ?>
 
@@ -45,71 +42,71 @@ session_start();
 /* If the user is already logged in then check for username as a session variable and echo it */
 
 if (isset($_SESSION['username']))
-	{
-	echo "<br /><font size=\"2px\" face=\"arial\"><b>Logged as: <font color=blue>" . $_SESSION['username'] . "</font></b></font><br /><br />";
-	echo "<button onclick=\"change()\" class=\"btn btn-primary\" style=\"vertical-align:middle\">Settings</button>";
-	}
+    {
+    echo "<br /><font size=\"2px\" face=\"arial\"><b>Logged as: <font color=blue>" . $_SESSION['username'] . "</font></b></font><br /><br />";
+    echo "<button onclick=\"change()\" class=\"btn btn-primary\" style=\"vertical-align:middle\">Settings</button>";
+    }
 
-	/* If the user is not logged in then check for remember me cookie, This is because suppose the user has already checked "Keep logged in" during login then we check the cookie values and autologin the user */
+    /* If the user is not logged in then check for remember me cookie, This is because suppose the user has already checked "Keep logged in" during login then we check the cookie values and autologin the user */
 
   else if (isset($_COOKIE['rl1']))
-	{
-		/*Since cookie is again a user data, always filter the data using addslashes(mysql_real_escape(htmlspechialchars())). Never trust the use data */
+    {
+        /*Since cookie is again a user data, always filter the data using addslashes(mysql_real_escape(htmlspechialchars())). Never trust the use data */
 
-	$rl1 = $_COOKIE['rl1'];
-	$ip = $_SERVER['REMOTE_ADDR'];
-	$rl2 = $_COOKIE['rl2'];
-	/* This is an important include for connecting to the database*/
-	include('config.php');
+    $rl1 = $_COOKIE['rl1'];
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $rl2 = $_COOKIE['rl2'];
+    /* This is an important include for connecting to the database*/
+    include('config.php');
 
-	/* When a new record regarding "Keep logged in" is added to the database, we use three values namely username hash, password hash and IP address to validate the autologin */
+    /* When a new record regarding "Keep logged in" is added to the database, we use three values namely username hash, password hash and IP address to validate the autologin */
 
-	$sql1 = "SELECT * FROM loggedin_users WHERE cookie='$rl1' AND ip='$ip' AND cookie2='$rl2'";
-	$result1 = mysqli_query($conn, $sql1);
-	if (mysqli_num_rows($result1) > 0)
-		{
-		$row = mysqli_fetch_assoc($result1);
+    $sql1 = "SELECT * FROM loggedin_users WHERE cookie='$rl1' AND ip='$ip' AND cookie2='$rl2'";
+    $result1 = mysqli_query($conn, $sql1);
+    if (mysqli_num_rows($result1) > 0)
+        {
+        $row = mysqli_fetch_assoc($result1);
 
-		/* If a record is found, we find the details of the users by running another query and store them as session */
-		session_start();
-		$_SESSION['username'] = $row['username'];
-		$sql2 = "SELECT * FROM registered_users WHERE username='" . $_SESSION['username'] . "'";
-		$result2 = mysqli_query($conn, $sql2);
-		while ($row1 = mysqli_fetch_assoc($result2))
-			{
-			$_SESSION['id'] = $row1['id'];
-			$_SESSION['rollno'] = $row1['rollno'];
-			$_SESSION['name'] = $row1['name'];
-			$_SESSION['sex'] = $row1['sex'];
-			$_SESSION['roomno'] = $row1['roomno'];
-			$_SESSION['branch'] = $row1['branch'];
-			$_SESSION['dob'] = $row1['dob'];
-			$_SESSION['sem'] = $row1['sem'];
-			$_SESSION['msg'] = $row1['notify'];
-			}
+        /* If a record is found, we find the details of the users by running another query and store them as session */
+        session_start();
+        $_SESSION['username'] = $row['username'];
+        $sql2 = "SELECT * FROM registered_users WHERE username='" . $_SESSION['username'] . "'";
+        $result2 = mysqli_query($conn, $sql2);
+        while ($row1 = mysqli_fetch_assoc($result2))
+            {
+            $_SESSION['id'] = $row1['id'];
+            $_SESSION['rollno'] = $row1['rollno'];
+            $_SESSION['name'] = $row1['name'];
+            $_SESSION['sex'] = $row1['sex'];
+            $_SESSION['roomno'] = $row1['roomno'];
+            $_SESSION['branch'] = $row1['branch'];
+            $_SESSION['dob'] = $row1['dob'];
+            $_SESSION['sem'] = $row1['sem'];
+            $_SESSION['msg'] = $row1['notify'];
+            }
 
-		//Once logged in the page is refreshed
+        //Once logged in the page is refreshed
 
-		header('location:index.php');
-		}
-	  else
-		{
-		/* If the cookie is found to be fake, we simply unset the cookie from the browser */
+        header('location:index.php');
+        }
+      else
+        {
+        /* If the cookie is found to be fake, we simply unset the cookie from the browser */
 
-		setCookie("rme", "rme", time() - 3700, "/");
-		echo "</span>
+        setCookie("rme", "rme", time() - 3700, "/");
+        echo "</span>
                         </td>
                         <td width=\"60%\"><span><font size=\"2px\" face=\"arial\"><b><br />Not Logged in <font color=blue>";
-		}
-	}
+        }
+    }
   else
-	{
-		/*If neither the user is logged in nor any remember me cookie is set then the following code is executed */
+    {
+        /*If neither the user is logged in nor any remember me cookie is set then the following code is executed */
 
-	echo "</span>
+    echo "</span>
                         </td>
                         <td width=\"30%\"><span><font size=\"2px\" face=\"arial\"><b><br />Not Logged in <font color=blue>";
-	}
+    }
 
 ?></span>
                         </td>
@@ -118,13 +115,13 @@ if (isset($_SESSION['username']))
 session_start();
 // The following code toggles the toggle button depending on the user is logged in or not
 if (isset($_SESSION['username']))
-	{
-	echo "onclick=\"logout()\"";
-	}
+    {
+    echo "onclick=\"logout()\"";
+    }
   else
-	{
-	echo "onclick=\"togglefucntion()\"";
-	}
+    {
+    echo "onclick=\"togglefucntion()\"";
+    }
 
 ?> ><div class="uncircle" id="circle"></div></div></span>
                         </td>
@@ -191,7 +188,14 @@ if (isset($_SESSION['username']))
                 </div>
                 <!-- This is the part where messages related to register error is shown -->
                 <font color="red"><font size="2px" face="arial"><b><div id="register_error"></div></b></font></font>
-                <font size="2px" face="arial"><b><div id="response"></div></b></font>
+                <font size="2px" face="arial"><b><div id="response">
+                    <?php
+                    if(isset($_COOKIE['cin']) && isset($_GET['register']) && $_GET['register']==1){
+                        echo "<font color=green><br>Your records has been added. Please continue with the registration process by selecting your Roll no and Date of Birth";
+                        
+                    }
+                    ?>
+                </div></b></font>
                 <br />
                 <div class="form-group" id="register">
 
@@ -315,7 +319,7 @@ if (isset($_SESSION['username']))
                 </div>
             </div>
             <div class="modal-body">
-            	<!-- Messages related to login errors appear here -->
+                <!-- Messages related to login errors appear here -->
                 <font color="red"><div id="login_error"></div></font>
                 <div id="loginresponse"></div>
                 <br />
@@ -369,7 +373,7 @@ if (isset($_SESSION['username']))
             </div>
 
             <div class="modal-body">
-            	<!-- This is where error are displayed -->
+                <!-- This is where error are displayed -->
                 <font color="red"><font size="2px" face="arial"><b><div id="update_error"></div></b></font></font>
                 <font size="2px" face="arial"><b><div id="update_response"></div></b></font>
                 <br />
