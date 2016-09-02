@@ -9,7 +9,7 @@ Ranchi, India<br>
 <h3>To setup the site follow the following steps : </h3>
 
 1. Install a WAMP or LAMP server on the server.
-2. Login to PHPMYADMIN (http://localhost/phpmyadmin if the server is on localhost). Now run the SQL query present in the bitzoom.sql file in the bitzoom database. 
+2. Login to PHPMYADMIN (http://localhost/phpmyadmin if the server is on localhost). Now run the SQL query present in the bitzoom.sql file in the database. 
 3. Open the file config.php and enter the database details in the file.
 4. Give full permission to uploads/ folder, so that PHP can write to it when a file is uploaded.
 5. Visit the index.php in the browser. 
