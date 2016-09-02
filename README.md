@@ -37,3 +37,4 @@ The database consists of 6 tables:<br>
 2. Increase the upload file limit in php.ini. By default it is about 8 MB.<br>
 3. Increase the time limit for a script to be executed on the server. This is required so as large files can be downloaded.<br>
 4. Turn off error and warning reporting in 'php.ini' file.
+5. Change the folder location of BitZoom, BitZoomQP and uploads to another location and update about the same in upload.php, list.php, listqp.php, download.php, downloadqp.php
