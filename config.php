@@ -1,9 +1,9 @@
 <?php
 
 /*If the user enters correct data then we connect to SQL database and insert the records */
-$servername = "localhost"; //My database is present in localhost
+$servername = "localhost"; //Mostly localhost
 $username = "root"; //Username required to login to database
-$password = "mysql"; //Password required to login
+$password = "Bit$%*Zoom2016"; //Password required to login
 $dbname = "bitzoom"; //Database name in which the contact table is available
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
