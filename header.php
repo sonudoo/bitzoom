@@ -1,5 +1,17 @@
 <?php /* This is the header file and the longest script of all. This file contains the header part of every page. It contains menus, logo, scripts, modals etc. */ ?>
-
+<?php
+/* Uncomment the following to add a hits counter for your site */
+/*$datei = fopen("counter.log","r");
+$count = fgets($datei,1000);
+fclose($datei);
+$count=$count + 1 ;
+echo "$count" ;
+echo " hits" ;
+echo "\n" ;
+$datei = fopen("counter.log","w");
+fwrite($datei, $count);
+fclose($datei);*/
+?>
 <?php 
 /* Uncomment the following lines if you want to forse SSL on your website for secure browsing */ 
 /*if($_SERVER[ "HTTPS"] !="on" ) { 
