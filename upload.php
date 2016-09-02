@@ -56,25 +56,24 @@ if (isset($_POST['subject']) && isset($_POST['captcha_code']) && $_FILES["file"]
   $rand = $output;
   mkdir("uploads/" . $rand . "/");
   $target_dir = "uploads/" . $rand . "/";
-  $uploadOk = 1;
   $target_file = $target_dir . basename($_FILES["file"]["name"]);
-  $uploadOk = 1;
+  $uploadbool = 1;
   $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-  /* Now we check the file type, extension, mime type, and size. All the conditions must be satisfied before the file can be submitted to be stored */
+  /* Now we check the file type, extension and size. All the conditions must be satisfied before the file can be submitted to be stored */
   if (file_exists($target_file))
     {
 
     // Validate a file of same name doesn't already exists. Not ver likely to happen as we used a 10 digit long random number.
 
-    $uploadOk = 0;
+    $uploadbool = 0;
     }
 
-  if ($_FILES["file"]["size"] > 40000000)
+  if ($_FILES["file"]["size"] > 8000000)
     {
 
-    // Next we make sure the size of the uploaded file is less than 40 MB. You can set it to your own value. Accordingly you need to change the value in php.ini file as well
+    // Next we make sure the size of the uploaded file is less than 8 MB. You can set it to your own value. Accordingly you need to change the value in php.ini file as well
 
-    $uploadOk = 0;
+    $uploadbool = 0;
     }
 
   if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "pdf" && $imageFileType != "doc" && $imageFileType != "ppt" && $imageFileType != "docx" && $imageFileType != "zip" && $imageFileType != "rar" && $imageFileType != "pptx")
@@ -82,10 +81,10 @@ if (isset($_POST['subject']) && isset($_POST['captcha_code']) && $_FILES["file"]
 
     // We restrict the file to be of type hpg, gif, jprg, pdf, gif, doc, ppt, docx, pdf, zip, pptx. You may add more
 
-    $uploadOk = 0;
+    $uploadbool = 0;
     }
 
-  if ($uploadOk == 0)
+  if ($uploadbool == 0)
     {
 
     // If any of the above conditions was not not satisfied, we throw a error.
@@ -112,7 +111,7 @@ if (isset($_POST['subject']) && isset($_POST['captcha_code']) && $_FILES["file"]
         }
         else
         {
-        echo "Error: " . $sql . "<br />" . mysqli_error($conn);
+        echo "Unknown error occured";
         }
 
       mysqli_close($conn);
@@ -339,7 +338,7 @@ if (isset($_SESSION['username']) && (!isset($_GET['done'])))
 
 <div class=\"row\">
   <div class=\"col-sm-3\"></div>
-  <div class=\"col-sm-6\"><br /><br /><font size=2px face=arial><b>General Instructions : <br />1. Max upload size is 40 MB.<br />2. Uploaded files would be verified before posting.<br />3. If you have many files to upload, please Zip and upload. Mention about the same in the comments. <br />4. Allowable file formats : JPG, PNG, PDF, ZIP, RAR, DOC, PPT</b></font><br /><br /></div>
+  <div class=\"col-sm-6\"><br /><br /><font size=2px face=arial><b>General Instructions : <br />1. Max upload size is 8 MB (Server Default, Can be changed in php.ini).<br />2. Uploaded files would be verified before posting.<br />3. If you have many files to upload, please Zip and upload. Mention about the same in the comments. <br />4. Allowable file formats : JPG, PNG, PDF, ZIP, RAR, DOC, PPT</b></font><br /><br /></div>
   <div class=\"col-sm-3\"></div>
 </div>
 </div>
