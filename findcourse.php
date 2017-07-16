@@ -18,7 +18,7 @@ if ($major == "" || $sem == "")
 include ('config.php ');
 
 /* Now we run the SQL query in which we look for all courses where major and sem is like the one user has entererd*/
-$sql1 = "SELECT * FROM course WHERE major LIKE '%$major%' AND sem LIKE'%$sem%'";
+$sql1 = "SELECT * FROM course WHERE major LIKE '%$major%' AND sem LIKE '%$sem%'";
 $result1 = mysqli_query($conn, $sql1);
 /* If the result of query is greater than 0 then courses has been found and we list down the courses along with course ID */
 

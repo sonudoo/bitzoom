@@ -15,7 +15,7 @@ if ($major == "" || $sem == "")
 	}
 
 /* This is an important include for connecting to the database*/
-include ('config.php ');
+include ('config.php');
 
 /* Now we run the SQL query in which we look for all courses where major and sem is like the one user has entererd. As there is no question papers for Sessional labs subject, so we make sure we don't list them. */
 $sql1 = "SELECT * FROM course WHERE major LIKE '%$major%' AND sem LIKE '%$sem%' AND coursename NOT LIKE '%lab%' AND coursename NOT LIKE '%LAB%' AND coursename NOT LIKE '%Lab%'";
